@@ -1,10 +1,10 @@
 const express = require('express');
 
+const productsController = require('../controllers/products.controller');
+
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-  res.status(200).json({ xablau: 'xablau' });
-});
+router.get('/', productsController.listProducts);
 
 router.get('/:id', async (req, res) => {});
 
