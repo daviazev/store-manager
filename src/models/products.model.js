@@ -5,8 +5,6 @@ const findAllProducts = async () => {
     'SELECT * FROM StoreManager.products',
   );
 
-  console.log(result);
-
   return result;
 };
 
