@@ -14,7 +14,17 @@ const listProductById = async (req, res) => {
   return res.status(200).json(message);
 };
 
+const controllerInsertProduct = async (req, res) => {
+  const { name } = req.body;
+  const { type, message } = await productsService.serviceInsertProduct(name);
+
+  if (type !== null) return res.status(400).json({ message });
+
+  return res.status(201).json({ name, id: message });
+};
+
 module.exports = {
   listProducts,
   listProductById,
+  controllerInsertProduct,
 };
