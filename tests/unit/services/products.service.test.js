@@ -33,4 +33,29 @@ describe('Testando camada service - products', function () {
 
     expect(result.message).to.be.equal('Product not found')
   })
+
+  it('Retorna null ao inserir um produto com nome válido', async function () {
+    sinon.stub(productsModel, 'insertProduct').resolves({ insertId: 1 });
+
+    const result = await productsService.serviceInsertProduct('Product X');
+
+    expect(result.type).to.be.equal(null)
+    expect(result.message.insertId).to.be.equal(1)
+  })
+
+  it('Retorna a mensagem "name is required" ao omitir o nome', async function () {
+    sinon.stub(productsModel, 'insertProduct').resolves();
+
+    const result = await productsService.serviceInsertProduct();
+
+    expect(result.message).to.be.equal('"name" is required')
+  })
+
+  it('Retorna a mensagem "name length must be at least 5 characters long" ao passar um nome com length menor que 5', async function () {
+    sinon.stub(productsModel, 'insertProduct').resolves({ insertId: 1 });
+
+    const result = await productsService.serviceInsertProduct('Prod');
+
+    expect(result.message).to.be.equal('"name" length must be at least 5 characters long')
+  })
 })
