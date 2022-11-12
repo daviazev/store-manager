@@ -24,4 +24,12 @@ describe('Testes de unidade do model de produtos', () => {
 
     expect(result).to.be.equal(allProductsResponse[0])
   })
+
+  it('Verifica o insertId do produto inserido', async function () {
+    sinon.stub(connection, 'execute').resolves([{ insertId: 10 }])
+
+    const result = await productsModel.insertProduct('Product X')
+
+    expect(result).to.be.equal(10)
+  })
 })
