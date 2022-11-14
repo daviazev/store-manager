@@ -22,9 +22,9 @@ const serviceInsertSalesProducts = async (arrayOfProducts) => {
     return validation.find(({ type }) => type);
   }
 
-  await salesModel.modelInsertSalesProducts(arrayOfProducts);
+  const insertId = await salesModel.modelInsertSalesProducts(arrayOfProducts);
 
-  return validation;
+  return { insertId, validation };
 };
 
 // serviceInsertSalesProducts(xablau);
