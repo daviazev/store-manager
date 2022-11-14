@@ -34,7 +34,7 @@ const modelInsertSalesProducts = async (arrayOfProducts) => {
 
   const erro = products.some((e) => !e);
 
-  if (erro) return console.log('Product not found');
+  if (erro) return;
   
   await Promise.all(arrayOfProducts.map(async (product) => {
     await connection.execute(
