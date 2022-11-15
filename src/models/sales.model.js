@@ -27,7 +27,7 @@ const getProductById = async (productId) => {
 };
 
 const modelInsertSalesProducts = async (arrayOfProducts) => {
-  const insertId = await modelInsertSales();
+  console.log('chegou aqui mano');
 
   const products = await Promise.all(arrayOfProducts.map((product) =>
     getProductById(product.productId)));
@@ -35,7 +35,9 @@ const modelInsertSalesProducts = async (arrayOfProducts) => {
   const erro = products.some((e) => !e);
 
   if (erro) return;
-  
+
+  const insertId = await modelInsertSales();
+
   await Promise.all(arrayOfProducts.map(async (product) => {
     await connection.execute(
       'INSERT INTO StoreManager.sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?)',
