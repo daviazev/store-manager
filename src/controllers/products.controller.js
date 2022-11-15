@@ -29,8 +29,27 @@ const controllerInsertProduct = async (req, res) => {
   return res.status(201).json({ name, id: message });
 };
 
+const controllerUpdateProduct = async (req, res) => {
+  const { name } = req.body;
+  const { id } = req.params;
+
+  const { type, message } = await productsService.serviceUpdateProduct(name, Number(id));
+
+  if (type) return res.status(404).json({ message });
+
+  const newProduct = {
+    id,
+    name,
+  };
+
+  return res.status(200).json(newProduct);
+};
+
+// controllerUpdateProduct({ body: { name: 'mapa do maroto' }, params: { id: 6 } });
+
 module.exports = {
   listProducts,
   listProductById,
   controllerInsertProduct,
+  controllerUpdateProduct,
 };

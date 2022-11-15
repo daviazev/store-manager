@@ -1,4 +1,4 @@
-const { insertProductValidation, insertProductSaleValidation } = require('./schema');
+const { insertProductValidation, insertProductSaleValidation, updateProduct } = require('./schema');
 
 const validateProductName = (name) => {
   const { error } = insertProductValidation.validate({ name });
@@ -16,7 +16,19 @@ const validateSaleProductsFields = (productId, quantity) => {
   return { type: null, message: '' };
 };
 
+const validateName = (name) => {
+  console.log('aaaaaaaaa', name);
+  const { error } = updateProduct.validate({ name });
+
+  console.log(error);
+
+  if (error) return { type: error.message, message: error.message };
+
+  return { type: null, message: '' };
+};
+
 module.exports = {
   validateProductName,
   validateSaleProductsFields,
+  validateName,
 };

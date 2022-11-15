@@ -29,7 +29,7 @@ const serviceUpdateProduct = async (newProductName, productId) => {
 
   if (product) return { type: null, message: product };
 
-  return { message: 'Product not found' };
+  return { type: 'Product not found', message: 'Product not found' };
 };
 
 module.exports = {

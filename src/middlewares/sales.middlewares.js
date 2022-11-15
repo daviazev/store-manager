@@ -1,4 +1,6 @@
-const { validateSaleProductsFields } = require('../services/validations/validations.values');
+const {
+  validateSaleProductsFields, validateName,
+} = require('../services/validations/validations.values');
 
 const checkError = (message) => {
   if (message === '"quantity" must be greater than or equal to 1') {
@@ -30,6 +32,21 @@ const fieldsValidation = (req, res, next) => {
   return next();
 };
 
+const updateNameValidation = (req, res, next) => {
+  const { name } = req.body;
+
+  const validation = validateName(name);
+
+  const err1 = '"name" is required';
+  const err2 = '"name" length must be at least 5 characters long';
+
+  if (validation.type === err1) return res.status(400).json(validation);
+  if (validation.type === err2) return res.status(422).json(validation);
+
+  return next();
+};
+
 module.exports = {
   fieldsValidation,
+  updateNameValidation,
 };
