@@ -1,3 +1,4 @@
+const camelize = require('camelize');
 const connection = require('./connection');
 
 // const { productsModel } = require('./index');
@@ -46,6 +47,17 @@ const modelInsertSalesProducts = async (arrayOfProducts) => {
   return insertId;
 };
 
+const modelGetAllSales = async () => {
+  const [result] = await connection.execute(
+    `SELECT SP.sale_id, S.date, SP.product_id, SP.quantity
+      FROM StoreManager.sales AS S INNER JOIN 
+      StoreManager.sales_products AS SP ON SP.sale_id = S.id
+      ORDER BY SP.sale_id ASC, SP.product_id`,
+  );
+
+  return camelize(result);
+};
+
 // modelInsertSalesProducts(
 //     [
 //   {
@@ -63,4 +75,5 @@ module.exports = {
   modelInsertSales,
   modelInsertSalesProducts,
   getProductById,
+  modelGetAllSales,
 };

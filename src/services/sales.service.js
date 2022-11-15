@@ -19,8 +19,14 @@ const serviceInsertSalesProducts = async (arrayOfProducts) => {
   return { insertId };
 };
 
+const serviceGetAllSales = async () => {
+  const sales = await salesModel.modelGetAllSales();
+  return { type: null, message: sales };
+};
+
 // serviceInsertSalesProducts(xablau);
 
 module.exports = {
   serviceInsertSalesProducts,
+  serviceGetAllSales,
 };

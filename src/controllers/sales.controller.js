@@ -16,4 +16,12 @@ const controllerInsertSalesProducts = async (req, res) => {
   return res.status(201).json(sucessResult);
 };
 
-module.exports = { controllerInsertSalesProducts };
+const controllerGetAllSales = async (_req, res) => {
+  const { message } = await salesService.serviceGetAllSales();
+  return res.status(200).json(message);
+};
+
+module.exports = {
+  controllerInsertSalesProducts,
+  controllerGetAllSales,
+};

@@ -10,4 +10,6 @@ router.use(express.json());
 
 router.post('/', fieldsValidation, salesController.controllerInsertSalesProducts);
 
+router.get('/', salesController.controllerGetAllSales);
+
 module.exports = router;
