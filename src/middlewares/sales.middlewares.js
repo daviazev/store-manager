@@ -22,8 +22,6 @@ const fieldsValidation = (req, res, next) => {
 
   const typeValidation = validation.find(({ type }) => type);
 
-  console.log('>>>>>>>>>>>>>>>.', typeValidation);
-
   if (typeValidation) {
     const { message, status } = checkError(typeValidation.message);
     return res.status(status).json({ message });

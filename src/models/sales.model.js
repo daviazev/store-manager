@@ -27,8 +27,6 @@ const getProductById = async (productId) => {
 };
 
 const modelInsertSalesProducts = async (arrayOfProducts) => {
-  console.log('chegou aqui mano');
-
   const products = await Promise.all(arrayOfProducts.map((product) =>
     getProductById(product.productId)));
 
@@ -64,4 +62,5 @@ const modelInsertSalesProducts = async (arrayOfProducts) => {
 module.exports = {
   modelInsertSales,
   modelInsertSalesProducts,
+  getProductById,
 };
