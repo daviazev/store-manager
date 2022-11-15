@@ -58,6 +58,17 @@ const modelGetAllSales = async () => {
   return camelize(result);
 };
 
+const modelGetSaleById = async (saleId) => {
+  const [result] = await connection.execute(
+    `SELECT D.date, SP.product_id, SP.quantity FROM
+    StoreManager.sales AS D
+    INNER JOIN StoreManager.sales_products AS SP 
+    ON D.id = SP.sale_id WHERE D.id = ?`, [saleId],
+  );
+
+  return camelize(result);
+};
+
 // modelInsertSalesProducts(
 //     [
 //   {
@@ -76,4 +87,5 @@ module.exports = {
   modelInsertSalesProducts,
   getProductById,
   modelGetAllSales,
+  modelGetSaleById,
 };
