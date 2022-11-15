@@ -27,7 +27,7 @@ const serviceGetAllSales = async () => {
 const serviceGetSaleById = async (saleId) => {
   const sales = await salesModel.modelGetSaleById(saleId);
   if (sales.length === 0) return { message: 'Sale not found' };
-  return sales;
+  return { type: null, message: sales };
 };
 
 // serviceInsertSalesProducts(xablau);

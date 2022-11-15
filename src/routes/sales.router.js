@@ -12,4 +12,6 @@ router.post('/', fieldsValidation, salesController.controllerInsertSalesProducts
 
 router.get('/', salesController.controllerGetAllSales);
 
+router.get('/:id', salesController.controllerGetSaleById);
+
 module.exports = router;

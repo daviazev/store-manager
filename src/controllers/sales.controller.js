@@ -21,7 +21,16 @@ const controllerGetAllSales = async (_req, res) => {
   return res.status(200).json(message);
 };
 
+const controllerGetSaleById = async (req, res) => {
+  const { id } = req.params;
+  const { message } = await salesService.serviceGetSaleById(id);
+
+  if (message === 'Sale not found') return res.status(404).json({ message });
+  return res.status(200).json(message);
+};
+
 module.exports = {
   controllerInsertSalesProducts,
   controllerGetAllSales,
+  controllerGetSaleById,
 };
