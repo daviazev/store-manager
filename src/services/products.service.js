@@ -24,8 +24,17 @@ const serviceInsertProduct = async (name) => {
   return { type: null, message: product };
 };
 
+const serviceUpdateProduct = async (newProductName, productId) => {
+  const product = await productsModel.modelUpdateProduct(newProductName, productId);
+
+  if (product) return { type: null, message: product };
+
+  return { message: 'Product not found' };
+};
+
 module.exports = {
   getAllProducts,
   getProductById,
   serviceInsertProduct,
+  serviceUpdateProduct,
 };
