@@ -24,9 +24,16 @@ const serviceGetAllSales = async () => {
   return { type: null, message: sales };
 };
 
+const serviceGetSaleById = async (saleId) => {
+  const sales = await salesModel.modelGetSaleById(saleId);
+  if (sales.length === 0) return { message: 'Sale not found' };
+  return sales;
+};
+
 // serviceInsertSalesProducts(xablau);
 
 module.exports = {
   serviceInsertSalesProducts,
   serviceGetAllSales,
+  serviceGetSaleById,
 };
