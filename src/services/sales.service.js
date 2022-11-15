@@ -1,5 +1,4 @@
 const { salesModel } = require('../models');
-const { validateSaleProductsFields } = require('./validations/validations.values');
 
 //   const xablau = [
 //   {
@@ -13,20 +12,11 @@ const { validateSaleProductsFields } = require('./validations/validations.values
 // ];
 
 const serviceInsertSalesProducts = async (arrayOfProducts) => {
-  const validation = arrayOfProducts.map(({ productId, quantity }) =>
-    validateSaleProductsFields(productId, quantity));
-
-  const typeValidation = validation.some(({ type }) => type);
-
-  if (typeValidation) {
-    return validation.find(({ type }) => type);
-  }
-
   const insertId = await salesModel.modelInsertSalesProducts(arrayOfProducts);
 
   console.log(insertId);
 
-  return { insertId, validation };
+  return { insertId };
 };
 
 // serviceInsertSalesProducts(xablau);
