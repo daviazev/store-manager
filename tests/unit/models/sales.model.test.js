@@ -5,8 +5,6 @@ const { salesModel } = require('../../../src/models');
 const connection = require('../../../src/models/connection');
 
 const {
-  nonexistentProductIdBody,
-  nonexistentProductIdBody2,
   rightSaleBody,
 } = require('./mocks/sales.model.mock')
 
