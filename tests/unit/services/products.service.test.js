@@ -76,3 +76,5 @@ describe('Testando camada service - products', function () {
     expect(result.message).to.be.equal('Product not found')
   })
 })
+
+// commitando de novo porque os testes quebraram no github
