@@ -41,9 +41,24 @@ const modelUpdateProduct = async (newProductName, productId) => {
   return doesProductExist;
 };
 
+const modelDeleteProductById = async (productId) => {
+  const doesProductExist = await findProductById(productId);
+
+  if (doesProductExist) {
+    const [{ affectedRows }] = await connection.execute(
+      'DELETE FROM StoreManager.products WHERE id = ?', [productId],
+    );
+
+    return affectedRows;
+  }
+
+  return doesProductExist;
+};
+
 module.exports = {
   findAllProducts,
   findProductById,
   insertProduct,
   modelUpdateProduct,
+  modelDeleteProductById,
 };
