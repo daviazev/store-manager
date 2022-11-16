@@ -111,4 +111,42 @@ describe('Testes de unidade do controller - products', async function () {
 
     expect(res.status).to.be.calledWith(422);
   })
+
+  it('Retorna o status 404 ao tentar atualizar um product com id inexistente', async function () {
+    const req = { body: { name: "Mapa do Maroto" }, params: { id: 9999 } };
+    const res = {};
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    sinon
+      .stub(productsService, 'serviceUpdateProduct')
+      .resolves({
+        type: "Product not found",
+        message: "Product not found"
+      });
+    
+    await productsController.controllerUpdateProduct(req, res);
+
+    expect(res.status).to.be.calledWith(404);
+  })
+
+  it('Retorna o status 404 ao tentar atualizar um product com id inexistente', async function () {
+    const req = { body: { name: "Mapa do Maroto" }, params: { id: 1 } };
+    const res = {};
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    sinon
+      .stub(productsService, 'serviceUpdateProduct')
+      .resolves({
+        type: null,
+        message: [{ id: 1, name: "Mapa do Maroto" }]
+      });
+    
+    await productsController.controllerUpdateProduct(req, res);
+
+    expect(res.status).to.be.calledWith(200);
+  })
 });
