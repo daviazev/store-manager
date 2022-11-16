@@ -17,10 +17,7 @@ const validateSaleProductsFields = (productId, quantity) => {
 };
 
 const validateName = (name) => {
-  console.log('aaaaaaaaa', name);
   const { error } = updateProduct.validate({ name });
-
-  console.log(error);
 
   if (error) return { type: error.message, message: error.message };
 

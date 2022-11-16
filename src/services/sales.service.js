@@ -14,8 +14,6 @@ const { salesModel } = require('../models');
 const serviceInsertSalesProducts = async (arrayOfProducts) => {
   const insertId = await salesModel.modelInsertSalesProducts(arrayOfProducts);
 
-  // console.log(insertId);
-
   return { insertId };
 };
 
