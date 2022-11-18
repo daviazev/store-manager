@@ -104,4 +104,37 @@ describe('Testes para a camada service, rota /sales', function () {
     expect(res.status).to.have.been.calledWith(404);
     expect(res.json).to.have.been.calledWith({ message: 'Sale not found'})
   })
+
+  it('retorna sale not found ao tentar deletar uma venda inexistente', async function () {
+    const req = { params: { id: 100 }};
+    const res = {};
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    sinon
+      .stub(salesService, 'serviceDeleteSaleById')
+      .resolves({ message: 'Sale not found' });
+    
+    await salesController.controllerDeleteSaleById(req, res);
+
+    expect(res.status).to.have.been.calledWith(404);
+    expect(res.json).to.have.been.calledWith({ message: 'Sale not found'})
+  })
+
+  it('retorna status 204 ao deletar uma venda', async function () {
+    const req = { params: { id: 1 }};
+    const res = {};
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    sinon
+      .stub(salesService, 'serviceDeleteSaleById')
+      .resolves({ status: 204 });
+    
+    await salesController.controllerDeleteSaleById(req, res);
+
+    expect(res.status).to.have.been.calledWith(204);
+  })
 });

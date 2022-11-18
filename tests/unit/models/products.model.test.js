@@ -56,4 +56,26 @@ describe('Testes de unidade do model de produtos', () => {
     expect(product).to.be.equal(undefined)
     expect(result).to.be.equal(undefined)
   })
+
+  it('Testa se retorna todos os produtos ao passar uma query vazia', async function () {
+    sinon.stub(connection, 'execute').resolves([allProductsResponse]);
+
+    const result = await productsModel.modelGetProductsByQuery();
+
+    expect(result).to.be.deep.equal(allProductsResponse);
+  })
+
+  it('Testa deletar um produto que nao existe', async function () { 
+    sinon.stub()
+      .onFirstCall().resolves(undefined)
+      .onSecondCall().resolves(undefined);
+
+    const product = await productsModel.findProductById(999);
+    const result = await productsModel.modelDeleteProductById(999);
+
+    console.log(result);
+
+    expect(product).to.be.equal(undefined)
+    expect(result).to.be.equal(undefined)
+  });
 })

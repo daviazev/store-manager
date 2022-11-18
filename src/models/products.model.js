@@ -1,14 +1,10 @@
 const connection = require('./connection');
 
 const findAllProducts = async () => {
-  try {
-    const [result] = await connection.execute(
-      'SELECT * FROM StoreManager.products',
-    );
-    return result;
-  } catch (error) {
-    console.log('ERRO:::::::', error.message);
-  }
+  const [result] = await connection.execute(
+    'SELECT * FROM StoreManager.products',
+  );
+  return result;
 };
 
 const findProductById = async (productId) => {

@@ -41,4 +41,26 @@ describe('Testes para a camada service, rota /sales', function () {
 
     expect(message).to.be.equal('Sale not found')
   })
+
+  it('Retorna sale not found ao tentar deletar uma venda que nao existe', async function () {
+    sinon.stub(salesModel, 'modelDeleteSaleById').resolves([]);
+
+    const result = await salesService.serviceDeleteSaleById(999);
+
+    expect(result.message).to.be.equal('Sale not found')
+  })
+
+  it('Retorna um array ao deletar uma venda', async function () {
+    const mock = [
+      { date: '2022-11-18T21:08:50.000Z', productId: 1, quantity: 5 },
+      { date: '2022-11-18T21:08:50.000Z', productId: 2, quantity: 10 }
+    ];
+
+    sinon.stub(salesModel, 'modelDeleteSaleById').resolves(mock)
+
+    const result = await salesService.serviceDeleteSaleById(1);
+
+    expect(result.type).to.be.equal(null);
+    expect(result.message).to.be.deep.equal(mock);
+  })
 })

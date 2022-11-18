@@ -75,4 +75,12 @@ describe('Testando camada service - products', function () {
 
     expect(result.message).to.be.equal('Product not found')
   })
+
+  it('Retorna um array com todos os produtos ao passar uma query vazia', async function () {
+    sinon.stub(productsModel, 'modelGetProductsByQuery').resolves(allProductsResponse);
+
+    const result = await productsService.serviceGetProductsByQuery();
+
+    expect(result).to.be.deep.equal(allProductsResponse)
+  })
 })
