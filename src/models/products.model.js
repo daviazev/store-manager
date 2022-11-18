@@ -55,10 +55,19 @@ const modelDeleteProductById = async (productId) => {
   return doesProductExist;
 };
 
+const modelGetProductsByQuery = async (query = '') => {
+  const [product] = await connection.execute(
+    'select * from StoreManager.products where name like ?', [`%${query}%`],
+  );
+
+  return product;
+};
+
 module.exports = {
   findAllProducts,
   findProductById,
   insertProduct,
   modelUpdateProduct,
   modelDeleteProductById,
+  modelGetProductsByQuery,
 };

@@ -42,10 +42,17 @@ const serviceDeleteProductById = async (productId) => {
   return { type: PRODUCT_NOT_FOUND, message: PRODUCT_NOT_FOUND };
 };
 
+const serviceGetProductsByQuery = async (query) => {
+  const result = await productsModel.modelGetProductsByQuery(query);
+
+  return result;
+};
+
 module.exports = {
   getAllProducts,
   getProductById,
   serviceInsertProduct,
   serviceUpdateProduct,
   serviceDeleteProductById,
+  serviceGetProductsByQuery,
 };

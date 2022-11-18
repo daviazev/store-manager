@@ -8,6 +8,8 @@ const router = express.Router();
 
 router.use(express.json());
 
+router.get('/search', productsController.controllerGetProductsByQuery);
+
 router.get('/', productsController.listProducts);
 
 router.get('/:id', productsController.listProductById);

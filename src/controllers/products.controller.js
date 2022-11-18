@@ -55,6 +55,16 @@ const controllerDeleteProductById = async (req, res) => {
   return res.status(204).json();
 };
 
+const controllerGetProductsByQuery = async (req, res) => {
+  const { q } = req.query;
+
+  const result = await productsService.serviceGetProductsByQuery(q);
+
+  return res.status(200).json(result);
+};
+
+// controllerGetProductsByQuery({ query: { q: '' } });
+
 // controllerUpdateProduct({ body: { name: 'mapa do maroto' }, params: { id: 6 } });
 
 module.exports = {
@@ -63,4 +73,5 @@ module.exports = {
   controllerInsertProduct,
   controllerUpdateProduct,
   controllerDeleteProductById,
+  controllerGetProductsByQuery,
 };
