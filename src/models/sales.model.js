@@ -70,20 +70,48 @@ const modelGetSaleById = async (saleId) => {
 const modelDeleteSaleById = async (saleId) => {
   const sale = await modelGetSaleById(saleId);
 
-  // console.log(sale);
-
   if (sale.length > 0) {
     await connection.execute(
       'DELETE FROM StoreManager.sales WHERE id = ?', [saleId],
     );
   }
 
-  // console.log('Sale not found');
-
   return sale;
 };
 
-// modelDeleteSaleById(55);
+const modelUpdateSaleById = async (arrayOfProducts, saleId) => {
+  const sale = await modelGetSaleById(saleId);
+
+  if (sale.length === 0) return 'Sale not found';
+
+  const products = await Promise.all(arrayOfProducts.map((product) =>
+    getProductById(product.productId)));
+  
+  const areThereAnyInvalidProduct = products.some((product) => !product);
+
+  if (areThereAnyInvalidProduct) return;
+
+  await Promise.all(arrayOfProducts.map((product) => connection.execute(
+    `UPDATE StoreManager.sales_products SET product_id = ?, quantity = ? 
+      WHERE sale_id = ? AND product_id = ?`,
+    [product.productId, product.quantity, saleId, product.productId],
+  )));
+
+  return null;
+};
+
+// const xablau = [
+//   {
+//     productId: 1,
+//     quantity: 99,
+//   },
+//   {
+//     productId: 2,
+//     quantity: 44,
+//   },
+// ];
+
+// modelUpdateSaleById(xablau, 11);
 
 module.exports = {
   modelInsertSales,
@@ -92,4 +120,5 @@ module.exports = {
   modelGetAllSales,
   modelGetSaleById,
   modelDeleteSaleById,
+  modelUpdateSaleById,
 };

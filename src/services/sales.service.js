@@ -1,16 +1,5 @@
 const { salesModel } = require('../models');
 
-//   const xablau = [
-//   {
-//     productId: 1,
-//     quantity: 1,
-//   },
-//   {
-//     productId: 2,
-//     quantity: 5,
-//   },
-// ];
-
 const serviceInsertSalesProducts = async (arrayOfProducts) => {
   const insertId = await salesModel.modelInsertSalesProducts(arrayOfProducts);
 
@@ -36,11 +25,29 @@ const serviceDeleteSaleById = async (saleId) => {
   return { type: null, message: sale };
 };
 
-// serviceInsertSalesProducts(xablau);
+const serviceUpdateSaleById = async (arrayOfProducts, saleId) => {
+  const result = await salesModel.modelUpdateSaleById(arrayOfProducts, saleId);
+
+  return result;
+};
+
+//   const xablau = [
+//   {
+//     productId: 1,
+//     quantity: 1,
+//   },
+//   {
+//     productId: 2,
+//     quantity: 5,
+//   },
+// ];
+
+// serviceUpdateSaleById(xablau, 1);
 
 module.exports = {
   serviceInsertSalesProducts,
   serviceGetAllSales,
   serviceGetSaleById,
   serviceDeleteSaleById,
+  serviceUpdateSaleById,
 };
