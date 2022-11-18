@@ -1,8 +1,6 @@
 const camelize = require('camelize');
 const connection = require('./connection');
 
-// const { productsModel } = require('./index');
-
 const dateGnerator = () => new Date().toISOString().slice(0, 19).replace('T', ' ');
 
 const modelInsertSales = async () => {
@@ -69,18 +67,23 @@ const modelGetSaleById = async (saleId) => {
   return camelize(result);
 };
 
-// modelInsertSalesProducts(
-//     [
-//   {
-//     productId: 1,
-//     quantity: 1,
-//   },
-//   {
-//     productId: 2,
-//     quantity: 5,
-//   },
-// ],
-// );
+const modelDeleteSaleById = async (saleId) => {
+  const sale = await modelGetSaleById(saleId);
+
+  // console.log(sale);
+
+  if (sale.length > 0) {
+    await connection.execute(
+      'DELETE FROM StoreManager.sales WHERE id = ?', [saleId],
+    );
+  }
+
+  // console.log('Sale not found');
+
+  return sale;
+};
+
+// modelDeleteSaleById(55);
 
 module.exports = {
   modelInsertSales,
@@ -88,4 +91,5 @@ module.exports = {
   getProductById,
   modelGetAllSales,
   modelGetSaleById,
+  modelDeleteSaleById,
 };

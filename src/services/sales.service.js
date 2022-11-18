@@ -28,10 +28,19 @@ const serviceGetSaleById = async (saleId) => {
   return { type: null, message: sales };
 };
 
+const serviceDeleteSaleById = async (saleId) => {
+  const sale = await salesModel.modelDeleteSaleById(saleId);
+
+  if (sale.length === 0) return { message: 'Sale not found' };
+
+  return { type: null, message: sale };
+};
+
 // serviceInsertSalesProducts(xablau);
 
 module.exports = {
   serviceInsertSalesProducts,
   serviceGetAllSales,
   serviceGetSaleById,
+  serviceDeleteSaleById,
 };
