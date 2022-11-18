@@ -45,16 +45,15 @@ describe('Testes de unidade do model de produtos', () => {
   //   expect(result).to.be.equal(1);
   // })
 
-  // it('Testa se ele não atualiza ao passar um produto com id inexistente', async function () {
-  //   sinon.stub()
-  //     .onFirstCall().resolves(undefined)
-  //     .onSecondCall().resolves(undefined);
+  it('Testa se ele não atualiza ao passar um produto com id inexistente', async function () {
+    sinon.stub()
+      .onFirstCall().resolves(undefined)
+      .onSecondCall().resolves(undefined);
     
-  //   const product = await productsModel.findProductById(999);
-  //   const result = await productsModel.modelUpdateProduct('Firebolt', 999);
+    const product = await productsModel.findProductById(999);
+    const result = await productsModel.modelUpdateProduct('Firebolt', 999);
 
-
-  //   expect(product).to.be.equal(undefined)
-  //   expect(result).to.be.equal(undefined)
-  // })
+    expect(product).to.be.equal(undefined)
+    expect(result).to.be.equal(undefined)
+  })
 })

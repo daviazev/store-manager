@@ -59,22 +59,20 @@ describe('Testando camada service - products', function () {
     expect(result.message).to.be.equal('"name" length must be at least 5 characters long')
   })
 
-  // it('Retorna type null', async function () {
-  //   sinon.stub(productsModel, 'modelUpdateProduct')
-  //     .resolves({ type: null, message: allProductsResponse[0] })
+  it('Retorna type null', async function () {
+    sinon.stub(productsModel, 'modelUpdateProduct')
+      .resolves({ type: null, message: allProductsResponse[0] })
 
-  //   const result = await productsService.serviceUpdateProduct('Nimbus 2000', 1)
+    const result = await productsService.serviceUpdateProduct('Nimbus 2000', 1)
 
-  //   expect(result.type).to.be.equal(null)
-  // })
+    expect(result.type).to.be.equal(null)
+  })
 
-  // it('Retorna product not found', async function () {
-  //   sinon.stub(productsModel, 'modelUpdateProduct').resolves(undefined)
+  it('Retorna product not found', async function () {
+    sinon.stub(productsModel, 'modelUpdateProduct').resolves(undefined)
 
-  //   const result = await productsService.serviceUpdateProduct('Nimbus', 2000)
+    const result = await productsService.serviceUpdateProduct('Nimbus', 2000)
 
-  //   expect(result.message).to.be.equal('Product not found')
-  // })
+    expect(result.message).to.be.equal('Product not found')
+  })
 })
-
-// commitando de novo porque os testes quebraram no github
